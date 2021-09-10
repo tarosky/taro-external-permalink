@@ -92,32 +92,34 @@ add_filter( 'the_permalink', function ( $link, $post ) {
 			return $link;
 	}
 	$attr = rtrim( tsep_target_attributes( $post, true, $quote ), $quote );
-	return $link . $quote . " " . $attr;
+	return $link . $quote . ' ' . $attr;
 }, 10, 2);
 
-add_action( 'template_redirect', function() {
-	if ( 'automatic' !== get_option( 'tsep_render_type' ) ) {
-		return;
-	}
-	ob_start();
-}, 9999 );
+//
+// In automatic mode, replace all link.
+//
+if ( 'automatic' === get_option( 'tsep_render_type' ) ) {
 
-add_action( 'wp_footer', function() {
-	if ( 'automatic' !== get_option( 'tsep_render_type' ) ) {
-		return;
-	}
-	$content = ob_get_contents();
-	ob_end_clean();
-	// Store
-	foreach ( tsep_url_store() as $url ) {
-		$content = preg_replace_callback( '#href=([\'"])([^\'"]+)([\'"])#u', function( $matches ) use ( $url ) {
-			list( $href, $quote1, $link, $quote2 ) = $matches;
-			if ( $link !== $url ) {
-				return $href;
-			} else {
-				return sprintf( 'href=%1$s%2$s%1$s target=%3$s_blank%3$s rel=%3$snoopener noreferrers%3$s', $quote1, $link, $quote2 );
-			}
-		}, $content );
-	}
-	echo $content;
-}, 9999 );
+	// Start output buffer.
+	add_action( 'template_redirect', function() {
+		ob_start();
+	}, 9999 );
+
+	// Replace all link tags.
+	add_action( 'wp_footer', function() {
+		$content = ob_get_contents();
+		ob_end_clean();
+		// Store
+		foreach ( tsep_url_store() as $url ) {
+			$content = preg_replace_callback( '#href=([\'"])([^\'"]+)([\'"])#u', function( $matches ) use ( $url ) {
+				list( $href, $quote1, $link, $quote2 ) = $matches;
+				if ( $link !== $url ) {
+					return $href;
+				} else {
+					return sprintf( 'href=%1$s%2$s%1$s target=%3$s_blank%3$s rel=%3$snoopener noreferrers%3$s', $quote1, $link, $quote2 );
+				}
+			}, $content );
+		}
+		echo $content;
+	}, 9999 );
+}

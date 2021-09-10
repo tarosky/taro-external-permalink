@@ -59,7 +59,10 @@ add_action( 'admin_init', function() {
 		if ( defined( 'EXTERNAL_PERMALINK_POST_TYPES' ) ) :
 			?>
 				<p class="description">
-					<?php printf( esc_html__( 'Constant %s is defined, so post types will be programmatically set. You cannot change them here.', 'tsep' ), '<code>EXTERNAL_PERMALINK_POST_TYPES</code>' ); ?>
+					<?php
+					// translators: %s is constant name.
+					printf( esc_html__( 'Constant %s is defined, so post types will be programmatically set. You cannot change them here.', 'tsep' ), '<code>EXTERNAL_PERMALINK_POST_TYPES</code>' );
+					?>
 				</p>
 			<?php
 		endif;
@@ -76,19 +79,22 @@ add_action( 'admin_init', function() {
 		];
 		?>
 		<select name="tsep_render_type">
-			<?php foreach ( $options as $value => $label ) {
+			<?php
+			foreach ( $options as $value => $label ) {
 				printf(
 					'<option value="%s" %s>%s</option>',
 					esc_attr( $value ),
 					selected( $value, get_option( 'tsep_render_type', '' ), false ),
 					esc_html( $label )
 				);
-			} ?>
+			}
+			?>
 		</select>
 		<?php
 		printf(
 			'<p class="description">%s</p>',
 			sprintf(
+				// translators: %s is function.
 				esc_html__( 'Please select how to render target and rel attributes. Function %s is also available.', 'tsep' ),
 				'<code>tsep_target_attributes()</code>'
 			)

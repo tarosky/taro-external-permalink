@@ -41,10 +41,12 @@ add_action( 'add_meta_boxes', function( $post_type ) {
 		return;
 	}
 	add_meta_box( 'tsep-meta-box', __( 'External Permalink', 'tsep' ), function( WP_Post $post ) {
+		wp_enqueue_media();
+		wp_enqueue_script( 'tsep-media-selector', tsep_url() . '/dist/js/media-selector.js', [ 'jquery' ], tsep_version(), true );
 		wp_nonce_field( 'tsep_save_post', '_tsepnonce' );
 		?>
 		<p class="description">
-			<?php esc_html_e( 'If external permalink is set, the url of this post will be replaced.', 'tsep' ) ?>
+			<?php esc_html_e( 'If external permalink is set, the url of this post will be replaced.', 'tsep' ); ?>
 		</p>
 		<p>
 			<label>
@@ -53,11 +55,11 @@ add_action( 'add_meta_boxes', function( $post_type ) {
 			</label>
 		</p>
 		<p>
-			<button class="button is-small" id="tsep-media-chooser"><?php esc_html_e( 'Open media library', 'tsep' ) ?></button>
+			<button class="button is-small" id="tsep-media-chooser"><?php esc_html_e( 'Open media library', 'tsep' ); ?></button>
 		</p>
 		<p>
 			<label>
-				<input type="checkbox" value="1" name="external-permalink-new" <?php checked( tsep_is_new_window( $post ) ) ?> />
+				<input type="checkbox" value="1" name="external-permalink-new" <?php checked( tsep_is_new_window( $post ) ); ?> />
 				<?php esc_html_e( 'Open in new window', 'tsep' ); ?>
 			</label>
 		</p>
