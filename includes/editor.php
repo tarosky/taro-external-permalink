@@ -84,3 +84,17 @@ add_action( 'save_post', function( $post_id, $post ) {
 	update_post_meta( $post_id, '_external_permalink', filter_input( INPUT_POST, 'external-permalink' ) );
 	update_post_meta( $post_id, '_external_permalink_new', (string) filter_input( INPUT_POST, 'external-permalink-new' ) );
 }, 10, 2 );
+
+/**
+ * Add post states.
+ *
+ * @param string[] $states States.
+ * @param WP_Post  $post   Post object.
+ * @return string[]
+ */
+add_filter( 'display_post_states', function( $states, $post ) {
+	if ( tsep_is_active( $post->post_type ) && tsep_get_url( $post ) ) {
+		$states['external'] = __( 'External Link', 'tsep' );
+	}
+	return $states;
+}, 10, 2 );
