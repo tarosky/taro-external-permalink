@@ -6,7 +6,7 @@ set -e
 PREFIX="refs/tags/"
 VERSION=${1#"$PREFIX"}
 
-echo "Building External Permalink v${VERSION}..."
+echo "Building Taro External Permalink v${VERSION}..."
 
 # Install composer.
 composer install --no-dev --prefer-dist
@@ -19,5 +19,5 @@ npm run package
 curl -L https://raw.githubusercontent.com/fumikito/wp-readme/master/wp-readme.php | php
 
 # Change version string.
-sed -i.bak "s/^Version: .*/Version: ${VERSION}/g" ./external-permalink.php
+sed -i.bak "s/^Version: .*/Version: ${VERSION}/g" ./taro-external-permalink.php
 sed -i.bak "s/^Stable Tag: .*/Stable Tag: ${VERSION}/g" ./readme.txt

@@ -20,5 +20,5 @@ wordpress
 vendor
 bin
 tests
-external-permalink.php.bak
+taro-external-permalink.php.bak
 readme.txt.bak

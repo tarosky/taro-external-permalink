@@ -1,4 +1,4 @@
-# External Permalink
+# Taro External Permalink
 
 
 Tags: notification, news, posts, permalink, url  
@@ -33,7 +33,7 @@ Click install and activate it.
 
 ### From Github
 
-See [releases](https://github.com/tarosky/external-permalink/releases).
+See [releases](https://github.com/tarosky/taro-external-permalink/releases).
 
 ## FAQ
 
@@ -43,7 +43,7 @@ Please create new ticket on support forum.
 
 ### How can I contribute?
 
-Create a new [issue](https://github.com/tarosky/external-permalink/issues) or send [pull requests](https://github.com/tarosky/external-permalink/pulls).
+Create a new [issue](https://github.com/tarosky/taro-external-permalink/issues) or send [pull requests](https://github.com/tarosky/taro-external-permalink/pulls).
 
 ## Changelog
 

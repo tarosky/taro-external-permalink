@@ -1,8 +1,8 @@
 <?php
 /**
-Plugin Name: External Permalink
-Plugin URI: https://wordpress.org/plugins/external-permalink/
-Description: Allow post to have external permalink includeing attachments.
+Plugin Name: Taro External Permalink
+Plugin URI: https://wordpress.org/plugins/taro-external-permalink/
+Description: Allow post to have external permalink including attachments.
 Author: Tarosky INC.
 Version: nightly
 Author URI: https://tarosky.co.jp/
