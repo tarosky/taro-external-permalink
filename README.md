@@ -1,5 +1,15 @@
 # External Permalink
 
+
+Tags: notification, news, posts, permalink, url  
+Contributors: tarosky, Takahashi_Fumiki  
+Tested up to: 5.8  
+Requires at least: 5.5  
+Requires PHP: 5.6  
+Stable Tag: nightly  
+License: GPLv3 or later  
+License URI: http://www.gnu.org/licenses/gpl-3.0.txt
+
 A WordPress plugin to allow some posts to have external permalink.
 
 ## Description
