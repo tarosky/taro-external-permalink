@@ -30,6 +30,20 @@ function tsep_is_active( $post_type ) {
 }
 
 /**
+ * Get default link.
+ *
+ * @param bool $default If true, always return default.
+ * @return string
+ */
+function tsep_link_text( $default = false ) {
+	$default = __( 'Please refer detail at <a href="%link%"%rel%>here</a>.', 'tsep' );
+	if ( $default ) {
+		return $default;
+	}
+	return get_option( 'tsep_link_label', $default );
+}
+
+/**
  * Register settings.
  */
 add_action( 'admin_init', function() {
@@ -102,4 +116,19 @@ add_action( 'admin_init', function() {
 	}, 'writing', 'tsep-setting' );
 	// Register.
 	register_setting( 'writing', 'tsep_render_type' );
+	// Add fields.
+	add_settings_field( 'tsep_link_label', __( 'Single Page Content', 'tsep' ), function() {
+		// translators: %s is lURL.
+		$placeholder = __( 'e.g. ', 'tsep' ) . tsep_link_text( true );
+		?>
+		<input type="text" name="tsep_link_label" value="<?php echo esc_attr( get_option( 'tsep_link_label', '' ) ) ?>"
+			class="widefat" placeholder="<?php echo esc_attr( $placeholder ); ?>"/>
+		<?php
+		printf(
+			'<p class="description">%s</p>',
+			esc_html__( 'On singular page, post content will be replaced with this content. %link% will be replaced to external link and %rel% will be replaced with target and rel attributes..', 'tsep' )
+		);
+	}, 'writing', 'tsep-setting' );
+	// Register.
+	register_setting( 'writing', 'tsep_link_label' );
 } );

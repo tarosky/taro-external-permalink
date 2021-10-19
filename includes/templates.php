@@ -37,13 +37,14 @@ function tsep_target_attributes( $post = null, $rel = true, $quote = '"' ) {
 /**
  * Save permlinks globally.
  *
- * @param string $save URL to save if set.
+ * @param string $save     URL to save if set.
+ * @param string $original Original URL.
  * @return string[]
  */
-function tsep_url_store( $save = '' ) {
+function tsep_url_store( $save = '', $original = '' ) {
 	static $urls = [];
 	if ( $save && ! in_array( $save, $urls, true ) ) {
-		$urls[] = $save;
+		$urls[ $original ] = $save;
 	}
 	return $urls;
 }
@@ -59,10 +60,10 @@ add_filter( 'post_link', function ( $permalink, $post ) {
 	if ( ! is_admin() && tsep_is_active( $post->post_type ) ) {
 		$url = tsep_get_url( $post );
 		if ( $url ) {
-			$permalink = $url;
 			if ( tsep_is_new_window( $post ) ) {
-				tsep_url_store( $permalink );
+				tsep_url_store( $permalink, $url );
 			}
+			$permalink = $url;
 		}
 	}
 	return $permalink;
@@ -95,6 +96,34 @@ add_filter( 'the_permalink', function ( $link, $post ) {
 	return $link . $quote . ' ' . $attr;
 }, 10, 2);
 
+/**
+ * Change content of singular page.
+ */
+add_filter( 'the_content', function( $content ) {
+	if ( ! is_singular() ) {
+		return $content;
+	}
+	$post = get_post();
+	if ( ! $post || ! tsep_is_active( $post->post_type ) ) {
+		return $content;
+	}
+	$link = tsep_get_url( $post );
+	if ( ! $link ) {
+		// This is not external link.
+		return $content;
+	}
+	$rel   = tsep_is_new_window( $post ) ? ' rel="noopener noreferrer" target="_blank"' : '';
+	$label = tsep_link_text();
+	foreach ( [
+		'%link%' => esc_url( $link ),
+		'%rel%'  => $rel,
+	] as $key => $value ) {
+		$label = str_replace( $key, $value, $label );
+	}
+	$content .= wp_kses_post( sprintf( '<p>%s</p>', $label ) );
+	return $content;
+} );
+
 //
 // In automatic mode, Add helper script.
 //
@@ -108,13 +137,26 @@ add_action( 'wp_footer', function() {
 		// No URLs to be replaced.
 		return;
 	}
-	// Load JavaScript helper.
-	wp_enqueue_script( 'tsep-replace-rel', tsep_url() . '/dist/js/replace-rel.js', [], tsep_version(), true );
-	$js = <<<'JS'
+	// Build JSON to pass URLs.
+	$json = [];
+	foreach ( $urls as $url => $original ) {
+		$json[] = [
+			'url'      => $url,
+			'original' => $original,
+		];
+	}
+	$json = json_encode( $json );
+	if ( ! $json ) {
+		// Invalid JSON, skip.
+		return;
+	}
+	$js = <<<'TXT'
 (function(){
 	window.tsepUrls = %s;
 })();
-JS;
-	$js = sprintf( $js, json_encode( $urls ) );
+TXT;
+	$js = sprintf( $js, $json );
+	// Load JavaScript helper.
+	wp_enqueue_script( 'tsep-replace-rel', tsep_url() . '/dist/js/replace-rel.js', [], tsep_version(), true );
 	wp_add_inline_script( 'tsep-replace-rel', $js, 'before' );
 }, 9 );
