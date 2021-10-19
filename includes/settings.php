@@ -69,7 +69,7 @@ add_action( 'admin_init', function() {
 	}, 'writing', 'tsep-setting' );
 	// Register.
 	register_setting( 'writing', 'tsep_post_types' );
-	// Add fiedls.
+	// Add fields.
 	add_settings_field( 'tsep_render_type', __( 'Attribues', 'tsep' ), function() {
 		$options = [
 			''             => __( 'No(writing code)', 'tsep' ),
