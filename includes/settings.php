@@ -121,7 +121,7 @@ add_action( 'admin_init', function() {
 		// translators: %s is lURL.
 		$placeholder = __( 'e.g. ', 'tsep' ) . tsep_link_text( true );
 		?>
-		<input type="text" name="tsep_link_label" value="<?php echo esc_attr( get_option( 'tsep_link_label', '' ) ) ?>"
+		<input type="text" name="tsep_link_label" value="<?php echo esc_attr( get_option( 'tsep_link_label', '' ) ); ?>"
 			class="widefat" placeholder="<?php echo esc_attr( $placeholder ); ?>"/>
 		<?php
 		printf(
