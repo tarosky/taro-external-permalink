@@ -104,7 +104,7 @@ add_action( 'wp_footer', function() {
 		return;
 	}
 	$urls = tsep_url_store();
-	if ( empty( $urls) ) {
+	if ( empty( $urls ) ) {
 		// No URLs to be replaced.
 		return;
 	}
