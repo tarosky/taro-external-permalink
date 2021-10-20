@@ -16,14 +16,14 @@ A WordPress plugin to allow some posts to have external permalink.
 
 This plugin add "External Link" section to your editor.
 
-If your posts are used as news in your site, sometimes a post is titled simply "Our service is promoted in famous web magazine" and jus having a single link to PR site.
+If your posts are used as news in your site, sometimes a post is titled simply "Our service is promoted in famous web magazine" and just having a single link to PR site.
 
 This plugin will add a meta box to save metadata below:
 
 1. External link
 2. Open in new window
 
-If you set external link, `the_permalink` will be replaced with it. The link in your widget, post archive, and so on will refer to the link you saved.
+If you set external link, `the_permalink` will be replaced with it. The link in your widget, post archive, and so on will refer to the URL you saved.
 
 ## Installation
 
