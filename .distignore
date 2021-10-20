@@ -11,6 +11,7 @@
 .wp-env.json
 node_modules
 composer.lock
+gulpfile.js
 package-lock.json
 phpcs.ruleset.xml
 phpunit.xml.dist
