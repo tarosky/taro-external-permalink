@@ -47,6 +47,10 @@ Create a new [issue](https://github.com/tarosky/taro-external-permalink/issues) 
 
 ## Changelog
 
+### 1.0.7
+
+* Support custom post type.
+* Fix bug of the content label in single page.
 
 ### 1.0.0
 
