@@ -56,7 +56,7 @@ function tsep_url_store( $save = '', $original = '' ) {
  * @param WP_Post $post      Post object.
  * @return string
  */
-add_filter( 'post_link', function ( $permalink, $post ) {
+function tsep_post_link_filter( $permalink, $post ) {
 	if ( ! is_admin() && tsep_is_active( $post->post_type ) ) {
 		$url = tsep_get_url( $post );
 		if ( $url ) {
@@ -67,7 +67,9 @@ add_filter( 'post_link', function ( $permalink, $post ) {
 		}
 	}
 	return $permalink;
-}, 10, 2 );
+}
+add_filter( 'post_link', 'tsep_post_link_filter', 10, 2 );
+add_filter( 'post_type_link', 'tsep_post_link_filter', 10, 2 );
 
 /**
  * If permalink is changes, add rel.
