@@ -36,11 +36,11 @@ function tsep_is_active( $post_type ) {
  * @return string
  */
 function tsep_link_text( $default = false ) {
-	$default = __( 'Please refer detail at <a href="%link%"%rel%>here</a>.', 'tsep' );
+	$default_label = __( 'Please refer detail at <a href="%link%"%rel%>here</a>.', 'tsep' );
 	if ( $default ) {
-		return $default;
+		return $default_label;
 	}
-	return get_option( 'tsep_link_label', $default );
+	return get_option( 'tsep_link_label', $default_label );
 }
 
 /**
