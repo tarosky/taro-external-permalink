@@ -2,11 +2,12 @@
  * Media selector.
  *
  * @handle tsep-media-selector
- * @deps jquery
+ * @deps jquery, wp-i18n
  * @package tsep
  */
 
 const $ = jQuery;
+const { __ } = wp.i18n;
 
 $( document ).ready( function() {
 
@@ -17,7 +18,7 @@ $( document ).ready( function() {
 
 		if ( ! MediaFrame ) {
 			MediaFrame = wp.media( {
-				title: 'Select Media',
+				title: __( 'Select Media to Link', 'tsep' ),
 				multiple : false,
 				library : {
 					type : 'image',
