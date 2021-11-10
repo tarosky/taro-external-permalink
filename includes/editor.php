@@ -56,7 +56,7 @@ add_action( 'add_meta_boxes', function( $post_type ) {
 			</label>
 		</p>
 		<p>
-			<button class="button is-small" id="tsep-media-chooser"><?php esc_html_e( 'Open media library', 'tsep' ); ?></button>
+			<button class="button is-small" id="tsep-media-chooser"><?php esc_html_e( 'Set File URL', 'tsep' ); ?></button>
 		</p>
 		<p>
 			<label>
