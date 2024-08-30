@@ -47,6 +47,12 @@ Create a new [issue](https://github.com/tarosky/taro-external-permalink/issues) 
 
 ## Changelog
 
+### 1.0.8
+
+* Drop support for PHP 5.6.
+* Allow PDF and other format on Media Selector.
+* Display notice if no post type is selected.
+
 ### 1.0.7
 
 * Support custom post type.
