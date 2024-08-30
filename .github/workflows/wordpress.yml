@@ -44,7 +44,7 @@ jobs:
 
   release:
     name: Deploy WordPress.org
-    needs: [ lint, assets ]
+    needs: [ status-check ]
     if: contains(github.ref, 'tags/')
     runs-on: ubuntu-latest
     steps:
