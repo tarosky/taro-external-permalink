@@ -20,9 +20,6 @@ $( document ).ready( function() {
 			MediaFrame = wp.media( {
 				title: __( 'Select Media to Link', 'tsep' ),
 				multiple : false,
-				library : {
-					type : 'image',
-				}
 			} );
 			MediaFrame.on( 'close', function() {
 				MediaFrame.state().get( 'selection' ).each( function( attachment ) {
