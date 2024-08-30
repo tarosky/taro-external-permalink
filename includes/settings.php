@@ -53,7 +53,7 @@ add_action( 'admin_init', function() {
 	// Section.
 	add_settings_section( 'tsep-setting', __( 'External Permalink', 'tsep' ), function() {
 		printf(
-			'<p class="description">%s</p>',
+			'<p id="tsep-setting" class="description">%s</p>',
 			esc_html__( 'This section determine which post type can have external permalink.', 'tsep' )
 		);
 	}, 'writing' );
@@ -131,4 +131,33 @@ add_action( 'admin_init', function() {
 	}, 'writing', 'tsep-setting' );
 	// Register.
 	register_setting( 'writing', 'tsep_link_label' );
+} );
+
+/**
+ * Display notices if no settings.
+ */
+add_action( 'admin_notices', function() {
+	if ( ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
+	$post_types = array_filter( tsep_post_types(), function( $post_type ) {
+		return post_type_exists( $post_type );
+	} );
+	if ( ! empty( $post_types ) ) {
+		return;
+	}
+	// No post type selected, so display notice.
+	?>
+	<div class="error">
+		<p>
+			<strong>Taro External Permalink</strong><br />
+			<?php
+			echo wp_kses_post( sprintf(
+				__( 'No post type is selected. Please choose post types to have external permalink at <a href="%s">Setting Page</a>', 'tsep' ),
+				esc_url( admin_url( 'options-writing.php#tsep-setting' ) )
+			) );
+			?>
+		</p>
+	</div>
+	<?php
 } );
