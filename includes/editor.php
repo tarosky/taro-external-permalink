@@ -36,11 +36,11 @@ function tsep_is_new_window( $post = null ) {
 /**
  * Register meta box.
  */
-add_action( 'add_meta_boxes', function( $post_type ) {
+add_action( 'add_meta_boxes', function ( $post_type ) {
 	if ( ! tsep_is_active( $post_type ) ) {
 		return;
 	}
-	add_meta_box( 'tsep-meta-box', __( 'External Permalink', 'tsep' ), function( WP_Post $post ) {
+	add_meta_box( 'tsep-meta-box', __( 'External Permalink', 'tsep' ), function ( WP_Post $post ) {
 		wp_enqueue_media();
 		wp_enqueue_script( 'tsep-media-selector', tsep_url() . '/dist/js/media-selector.js', [ 'jquery', 'wp-i18n' ], tsep_version(), true );
 		wp_set_script_translations( 'tsep-media-selector', 'tsep' );
@@ -74,7 +74,7 @@ add_action( 'add_meta_boxes', function( $post_type ) {
  * @param int     $post_id Post id.
  * @param WP_Post $post    Post object.
  */
-add_action( 'save_post', function( $post_id, $post ) {
+add_action( 'save_post', function ( $post_id, $post ) {
 	if ( ! tsep_is_active( $post->post_type ) ) {
 		return;
 	}
@@ -93,7 +93,7 @@ add_action( 'save_post', function( $post_id, $post ) {
  * @param WP_Post  $post   Post object.
  * @return string[]
  */
-add_filter( 'display_post_states', function( $states, $post ) {
+add_filter( 'display_post_states', function ( $states, $post ) {
 	if ( tsep_is_active( $post->post_type ) && tsep_get_url( $post ) ) {
 		$states['external'] = __( 'External Link', 'tsep' );
 	}

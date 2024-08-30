@@ -3,8 +3,8 @@
 
 Tags: notification, news, posts, permalink, url  
 Contributors: tarosky, Takahashi_Fumiki  
-Tested up to: 5.8  
-Requires at least: 5.5  
+Tested up to: 6.6  
+Requires at least: 5.9  
 Requires PHP: 5.6  
 Stable Tag: nightly  
 License: GPLv3 or later  
@@ -46,6 +46,12 @@ Please create new ticket on support forum.
 Create a new [issue](https://github.com/tarosky/taro-external-permalink/issues) or send [pull requests](https://github.com/tarosky/taro-external-permalink/pulls).
 
 ## Changelog
+
+### 1.0.8
+
+* Drop support for PHP 5.6.
+* Allow PDF and other format on Media Selector.
+* Display notice if no post type is selected.
 
 ### 1.0.7
 

@@ -101,7 +101,7 @@ add_filter( 'the_permalink', function ( $link, $post ) {
 /**
  * Change content of singular page.
  */
-add_filter( 'the_content', function( $content ) {
+add_filter( 'the_content', function ( $content ) {
 	if ( ! is_singular() ) {
 		return $content;
 	}
@@ -129,7 +129,7 @@ add_filter( 'the_content', function( $content ) {
 //
 // In automatic mode, Add helper script.
 //
-add_action( 'wp_footer', function() {
+add_action( 'wp_footer', function () {
 	if ( 'automatic' !== get_option( 'tsep_render_type' ) ) {
 		// Only on automatic mode.
 		return;
