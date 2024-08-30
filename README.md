@@ -3,8 +3,8 @@
 
 Tags: notification, news, posts, permalink, url  
 Contributors: tarosky, Takahashi_Fumiki  
-Tested up to: 5.8  
-Requires at least: 5.5  
+Tested up to: 6.6  
+Requires at least: 5.9  
 Requires PHP: 5.6  
 Stable Tag: nightly  
 License: GPLv3 or later  
