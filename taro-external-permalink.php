@@ -1,15 +1,17 @@
 <?php
 /**
-Plugin Name: Taro External Permalink
-Plugin URI: https://wordpress.org/plugins/taro-external-permalink/
-Description: Allow post to have external permalink including attachments.
-Author: Tarosky INC.
-Version: nightly
-Author URI: https://tarosky.co.jp/
-License: GPL3 or later
-License URI: https://www.gnu.org/licenses/gpl-3.0.html
-Text Domain: tsep
-Domain Path: /languages
+ * Plugin Name: Taro External Permalink
+ * Plugin URI: https://wordpress.org/plugins/taro-external-permalink/
+ * Description: Allow post to have external permalink including attachments.
+ * Author: Tarosky INC.
+ * Version: nightly
+ * Requires at least: 5.9
+ * Requires PHP: 5.6
+ * Author URI: https://tarosky.co.jp/
+ * License: GPL3 or later
+ * License URI: https://www.gnu.org/licenses/gpl-3.0.html
+ * Text Domain: tsep
+ * Domain Path: /languages
  */
 
 defined( 'ABSPATH' ) or die();
