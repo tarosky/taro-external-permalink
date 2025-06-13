@@ -12,16 +12,48 @@ A WordPress plugin to allow some posts to have external permalink.
 
 ## Description
 
-This plugin add "External Link" section to your editor.
+This plugin adds an "External Link" section to your editor.
 
-If your posts are used as news in your site, sometimes a post is titled simply "Our service is promoted in famous web magazine" and just having a single link to PR site.
+If you have posts that are mainly used to link to news articles on other websites, this plugin will override the post's permalink, redirecting users who click on the post directly to the source.
 
-This plugin will add a meta box to save metadata below:
+The "External Link" section has two options:
 
-1. External link
-2. Open in new window
+1. External link (This URL will replace the return value of `the_permalink`)
+2. Open in new window (checkbox)
 
-If you set external link, `the_permalink` will be replaced with it. The link in your widget, post archive, and so on will refer to the URL you saved.
+By setting an external link, the link in your widget, post archive and so on, will refer to the new URL you saved.
+
+### Settings
+
+This plugin adds a new section to Writing Settings with 3 different options.
+
+#### Post Types
+
+Lets you select which Post Types are allowed to have an external link.
+
+#### Attributes
+
+When set to Automatic, the target and rel attributes will be automatically added to anchor elements linking to the new URL, using jQuery.
+
+When set to Manual, developers are expected to add anchors manually. You can either use `tsep_anchor_attributes()` to generate the href, rel and target attributes, or use `the_permalink()` to populate the href attribute and `tsep_target_attributes()` to add the target and rel attributes separately.
+
+<pre>
+&lt;a &lt;?= tsep_anchor_attributes() ?&gt; class="some-class"&gt;Click here!&lt;/a&gt;
+</pre>
+
+#### Single Page Content
+
+This option allows you to manually write an anchor element that will be added to the post's content. Use %link% for the external link, and %rel% for the target and rel attributes.
+
+<pre>
+&lt;a href="%link%"%ref%&gt;Click here!&lt;/a&gt;
+</pre>
+
+This will produce the following output:
+
+<pre>
+&lt;a href="https://example.com" rel="noopener noreferrer" target="_black"&gt;Click here!&lt;/a&gt;
+</pre>
 
 ## Installation
 
