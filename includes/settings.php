@@ -36,7 +36,7 @@ function tsep_is_active( $post_type ) {
  * @return string
  */
 function tsep_link_text( $return_default = false ) {
-	$default_label = __( 'Please refer detail at <a href="%link%"%rel%>here</a>.', 'tsep' );
+	$default_label = __( 'For more details please refer to <a href="%link%"%rel%>here</a>.', 'tsep' );
 	if ( $return_default ) {
 		return $default_label;
 	}
@@ -84,12 +84,10 @@ add_action( 'admin_init', function () {
 	// Register.
 	register_setting( 'writing', 'tsep_post_types' );
 	// Add fields.
-	add_settings_field( 'tsep_render_type', __( 'Attribues', 'tsep' ), function () {
+	add_settings_field( 'tsep_render_type', __( 'Attributes', 'tsep' ), function () {
 		$options = [
-			''             => __( 'No(writing code)', 'tsep' ),
-			'double-quote' => __( 'Hook the_permalink(permalink is wrapped in double quote.)', 'tsep' ),
-			'single-quote' => __( 'Hook the_permalink(permalink is wrapped in single quote.)', 'tsep' ),
-			'automatic'    => __( 'Automatic', 'tesp' ),
+			'automatic' => __( 'Automatic', 'tsep' ),
+			'manual'    => __( 'Manual', 'tsep' ),
 		];
 		?>
 		<select name="tsep_render_type">
@@ -109,7 +107,9 @@ add_action( 'admin_init', function () {
 			'<p class="description">%s</p>',
 			sprintf(
 				// translators: %s is function.
-				esc_html__( 'Please select how to render target and rel attributes. Function %s is also available.', 'tsep' ),
+				esc_html__( 'When using Manual mode, use %1$s inside an anchor element to generate href, rel and target attributes. Or use %2$s to populate the href attribute and %3$s to add the target and rel attributes separately.', 'tsep' ),
+				'<code>tsep_anchor_attributes()</code>',
+				'<code>the_permalink()</code>',
 				'<code>tsep_target_attributes()</code>'
 			)
 		);
@@ -126,7 +126,7 @@ add_action( 'admin_init', function () {
 		<?php
 		printf(
 			'<p class="description">%s</p>',
-			esc_html__( 'On singular page, post content will be replaced with this content. %link% will be replaced to external link and %rel% will be replaced with target and rel attributes..', 'tsep' )
+			esc_html__( 'On a single post page, this will be added to the post\'s content. %link% will be replaced with the external link, and %rel% with the target and rel attributes.', 'tsep' )
 		);
 	}, 'writing', 'tsep-setting' );
 	// Register.
