@@ -38,7 +38,7 @@ When set to Automatic, the target and rel attributes will be automatically added
 When set to Manual, developers are expected to add anchors manually. You can either use `tsep_anchor_attributes()` to generate the href, rel and target attributes, or use `the_permalink()` to populate the href attribute and `tsep_target_attributes()` to add the target and rel attributes separately.
 
 <pre>
-&lt;a &lt;?= tsep_anchor_attributes() ?&gt; class="some-class"&gt;Click here!&lt;/a&gt;
+&lt;a &lt;?php echo tsep_anchor_attributes(); ?&gt; class="some-class"&gt;Click here!&lt;/a&gt;
 </pre>
 
 #### Single Page Content
