@@ -75,28 +75,13 @@ function tsep_post_link_filter( $permalink, $post ) {
 	if ( ! is_admin() && tsep_is_active( $post->post_type ) ) {
 		$url = tsep_get_url( $post );
 		if ( $url ) {
-			if ( tsep_is_new_window( $post ) ) {
-				tsep_url_store( $permalink, $url );
-			}
-			$permalink = $url;
+			return $url;
 		}
 	}
 	return $permalink;
 }
 add_filter( 'post_link', 'tsep_post_link_filter', 10, 2 );
 add_filter( 'post_type_link', 'tsep_post_link_filter', 10, 2 );
-
-/**
- * If permalink is changes, add rel.
- */
-add_filter( 'the_permalink', function ( $link, $post ) {
-	$post = get_post( $post );
-	if ( ! $post || ! tsep_is_active( $post->post_type ) ) {
-		return $link;
-	}
-	$link = tsep_get_url( $post );
-	return $link;
-}, 10, 2);
 
 /**
  * Change content of singular page.
