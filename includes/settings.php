@@ -36,7 +36,7 @@ function tsep_is_active( $post_type ) {
  * @return string
  */
 function tsep_link_text( $return_default = false ) {
-	$default_label = __( 'For more details please refer to <a href="%link%"%rel%>here</a>.', 'tsep' );
+	$default_label = __( 'For more details please refer to <a href="%link%" %rel%>here</a>.', 'tsep' );
 	if ( $return_default ) {
 		return $default_label;
 	}
@@ -54,7 +54,7 @@ add_action( 'admin_init', function () {
 	add_settings_section( 'tsep-setting', __( 'External Permalink', 'tsep' ), function () {
 		printf(
 			'<p id="tsep-setting" class="description">%s</p>',
-			esc_html__( 'This section determine which post type can have external permalink.', 'tsep' )
+			esc_html__( 'This section lets you select which post types should support external links.', 'tsep' )
 		);
 	}, 'writing' );
 	// Add fields.

@@ -47,7 +47,7 @@ add_action( 'add_meta_boxes', function ( $post_type ) {
 		wp_nonce_field( 'tsep_save_post', '_tsepnonce' );
 		?>
 		<p class="description">
-			<?php esc_html_e( 'If external permalink is set, the url of this post will be replaced.', 'tsep' ); ?>
+			<?php esc_html_e( 'Overrides the post’s permalink, redirecting clicks to this URL instead.', 'tsep' ); ?>
 		</p>
 		<p>
 			<label>
