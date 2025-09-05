@@ -25,13 +25,28 @@ function tsep_target_attributes( $post = null, $rel = true, $quote = '"' ) {
 		'target' => '_blank',
 	];
 	if ( $rel ) {
-		$attributes['rel'] = 'noopner noreferrer';
+		$attributes['rel'] = 'noopener noreferrer';
 	}
 	$html = [];
 	foreach ( $attributes as $attr => $value ) {
 		$html[] = sprintf( '%1$s=%3$s%2$s%3$s', $attr, esc_attr( $value ), $quote );
 	}
-	return implode( ' ', $attributes );
+	return implode( ' ', $html );
+}
+
+/**
+ * Get anchor attributes.
+ *
+ * @param null|int|WP_Post $post Post object.
+ * @return string
+ */
+function tsep_anchor_attributes( $post = null ) {
+	$post = get_post( $post );
+	if ( ! $post || ! tsep_is_active( $post->post_type ) ) {
+		return '';
+	}
+	$link = tsep_get_url( $post );
+	return 'href="' . $link . '" ' . tsep_target_attributes( $post );
 }
 
 /**
@@ -60,43 +75,13 @@ function tsep_post_link_filter( $permalink, $post ) {
 	if ( ! is_admin() && tsep_is_active( $post->post_type ) ) {
 		$url = tsep_get_url( $post );
 		if ( $url ) {
-			if ( tsep_is_new_window( $post ) ) {
-				tsep_url_store( $permalink, $url );
-			}
-			$permalink = $url;
+			return $url;
 		}
 	}
 	return $permalink;
 }
 add_filter( 'post_link', 'tsep_post_link_filter', 10, 2 );
 add_filter( 'post_type_link', 'tsep_post_link_filter', 10, 2 );
-
-/**
- * If permalink is changes, add rel.
- */
-add_filter( 'the_permalink', function ( $link, $post ) {
-	$post = get_post( $post );
-	if ( ! $post || ! tsep_is_active( $post->post_type ) ) {
-		return $link;
-	}
-	if ( ! tsep_is_new_window( $post ) ) {
-		return $link;
-	}
-	// Depends on render type.
-	$render_type = get_option( 'tsep_render_type', '' );
-	switch ( $render_type ) {
-		case 'single-quote':
-			$quote = "'";
-			break;
-		case 'double-quote':
-			$quote = '"';
-			break;
-		default:
-			return $link;
-	}
-	$attr = rtrim( tsep_target_attributes( $post, true, $quote ), $quote );
-	return $link . $quote . ' ' . $attr;
-}, 10, 2);
 
 /**
  * Change content of singular page.
