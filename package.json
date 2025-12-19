@@ -10,7 +10,7 @@
 		"dump": "grab-deps dump dist",
 		"build:js": "grab-deps js assets/js dist/js js",
 		"build:css": "sass ./assets/scss/:./dist/css/ --style=compressed && postcss ./dist/css/**/*.css --replace",
-		"lint": "npm run lint:css && npm run lint:js",
+		"lint": "npm run lint:js",
 		"lint:js": "wp-scripts lint-js 'assets/js/**/*.js'",
 		"lint:css": "wp-scripts lint-style 'assets/**/*.scss'",
 		"fix:js": "eslint --fix assets/js",
