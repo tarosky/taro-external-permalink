@@ -1,7 +1,14 @@
 {
-	"plugins": ["."],
+	"phpVersion": "8.3",
+	"plugins": [
+		".",
+		"https://downloads.wordpress.org/plugin/query-monitor.latest-stable.zip",
+		"https://downloads.wordpress.org/plugin/plugin-check.latest-stable.zip",
+		"https://downloads.wordpress.org/plugin/localhost2host-docker-internal.latest-stable.zip"
+	],
 	"themes": [
-		"https://downloads.wordpress.org/theme/twentytwenty.latest-stable.zip"
+		"https://downloads.wordpress.org/theme/twentytwenty.latest-stable.zip",
+		"https://downloads.wordpress.org/theme/twentytwentyfive.latest-stable.zip"
 	],
 	"config": {
 		"WP_DEBUG": true,
