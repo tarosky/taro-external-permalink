@@ -67,7 +67,7 @@ add_action( 'plugins_loaded', 'tsep_init' );
  *
  * @return void
  */
-function tsep_registers_assets() {
+function tsep_register_assets() {
 	$json = __DIR__ . '/wp-dependencies.json';
 	if ( ! file_exists( $json ) ) {
 		return;
@@ -90,7 +90,7 @@ function tsep_registers_assets() {
 					$footer['strategy'] = $dep['strategy'];
 				}
 				wp_register_script( $dep['handle'], $url, $dep['deps'], $dep['hash'], $footer );
-				if ( in_arary( 'wp-i18n', $dep['deps'], true ) ) {
+				if ( in_array( 'wp-i18n', $dep['deps'], true ) ) {
 					wp_set_script_translations( $dep['handle'], 'tsep' );
 				}
 				break;

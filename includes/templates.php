@@ -50,7 +50,7 @@ function tsep_anchor_attributes( $post = null ) {
 }
 
 /**
- * Save permlinks globally.
+ * Save permalinks globally.
  *
  * @param string $save     URL to save if set.
  * @param string $original Original URL.
@@ -75,6 +75,10 @@ function tsep_post_link_filter( $permalink, $post ) {
 	if ( ! is_admin() && tsep_is_active( $post->post_type ) ) {
 		$url = tsep_get_url( $post );
 		if ( $url ) {
+			// Save URL to store.
+			if ( tsep_is_new_window( $post ) ) {
+				tsep_url_store( $url, $permalink );
+			}
 			return $url;
 		}
 	}
@@ -111,9 +115,9 @@ add_filter( 'the_content', function ( $content ) {
 	return $content;
 } );
 
-//
-// In automatic mode, Add helper script.
-//
+/**
+ * In automatic mode, Add helper script.
+ */
 add_action( 'wp_footer', function () {
 	if ( 'automatic' !== get_option( 'tsep_render_type' ) ) {
 		// Only on automatic mode.
@@ -126,7 +130,7 @@ add_action( 'wp_footer', function () {
 	}
 	// Build JSON to pass URLs.
 	$json = [];
-	foreach ( $urls as $url => $original ) {
+	foreach ( $urls as $original => $url ) {
 		$json[] = [
 			'url'      => $url,
 			'original' => $original,
@@ -137,13 +141,13 @@ add_action( 'wp_footer', function () {
 		// Invalid JSON, skip.
 		return;
 	}
-	$js = <<<'TXT'
+	$js = <<<'JS'
 (function(){
 	window.tsepUrls = %s;
 })();
-TXT;
+JS;
 	$js = sprintf( $js, $json );
 	// Load JavaScript helper.
-	wp_enqueue_script( 'tsep-replace-rel', tsep_url() . '/dist/js/replace-rel.js', [], tsep_version(), true );
+	wp_enqueue_script( 'tsep-replace-rel' );
 	wp_add_inline_script( 'tsep-replace-rel', $js, 'before' );
 }, 9 );
