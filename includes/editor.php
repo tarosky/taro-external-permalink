@@ -16,7 +16,11 @@ function tsep_get_url( $post = null ) {
 	if ( ! $post ) {
 		return '';
 	}
-	return (string) get_post_meta( $post->ID, '_external_permalink', true );
+	$url = (string) get_post_meta( $post->ID, '_external_permalink', true );
+	if ( ! $url ) {
+		return '';
+	}
+	return $url;
 }
 
 /**
@@ -42,8 +46,7 @@ add_action( 'add_meta_boxes', function ( $post_type ) {
 	}
 	add_meta_box( 'tsep-meta-box', __( 'External Permalink', 'tsep' ), function ( WP_Post $post ) {
 		wp_enqueue_media();
-		wp_enqueue_script( 'tsep-media-selector', tsep_url() . '/dist/js/media-selector.js', [ 'jquery', 'wp-i18n' ], tsep_version(), true );
-		wp_set_script_translations( 'tsep-media-selector', 'tsep' );
+		wp_enqueue_script( 'tsep-media-selector' );
 		wp_nonce_field( 'tsep_save_post', '_tsepnonce' );
 		?>
 		<p class="description">

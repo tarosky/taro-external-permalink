@@ -4,26 +4,25 @@
 	"minimum-stability": "stable",
 	"license": "GPL-3.0-or-later",
 	"scripts": {
-		"lint": [
-			"phpcs --standard=phpcs.ruleset.xml $(find ./ -name '*.php')"
-		],
-		"fix": [
-			"phpcbf --standard=phpcs.ruleset.xml $(find ./ -name '*.php')"
-		]
+		"lint":  "phpcs --standard=phpcs.ruleset.xml $(find ./ -name '*.php')",
+		"fix": "phpcbf --standard=phpcs.ruleset.xml $(find ./ -name '*.php')"
 	},
 	"authors": [
 		{
-			"name": "TAROSKKY INC.",
+			"name": "TAROSKY INC.",
 			"email": "info@tarosky.co.jp"
 		}
 	],
 	"require": {
-		"php": ">=7.2"
+		"php": ">=7.4"
 	},
 	"require-dev": {
 		"wp-coding-standards/wpcs": "^3.0"
 	},
 	"config": {
+		"platform": {
+			"php": "7.4"
+		},
 		"allow-plugins": {
 			"dealerdirect/phpcodesniffer-composer-installer": true
 		}
