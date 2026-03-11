@@ -1,6 +1,7 @@
 {
 	"name": "external-permalink",
 	"scripts": {
+		"prepare": "husky",
 		"start": "wp-env start",
 		"update": "wp-env start --update",
 		"stop": "wp-env stop",
@@ -26,7 +27,9 @@
 		"npm-watch": "^0.13.0",
 		"postcss": "^8.5.6",
 		"postcss-cli": "^11.0.1",
-		"sass": "^1.97.0"
+		"sass": "^1.97.0",
+		"husky": "^9.1.7",
+		"lint-staged": "^16.2.7"
 	},
 	"dependencies": {},
 	"engines": {
@@ -46,5 +49,10 @@
 				"dist/css"
 			]
 		}
+	},
+	"lint-staged": {
+		"*.js": "npm run lint:js",
+		"*.scss": "npm run lint:css",
+		"*.php": "composer lint"
 	}
 }
