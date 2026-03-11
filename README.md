@@ -39,12 +39,13 @@ When set to Manual, developers must manually add anchor elements. You can either
 
 **Easy method:**
 ```php
-<a <?php echo tsep_anchor_attributes(123); ?> class="some-class">Click here!</a>
+<a &lt;?php echo tsep_anchor_attributes(123); ?&gt; class="some-class">Click here!</a>
 ```
 
 **With separate attributes:**
+
 ```php
-<a href="<?php echo the_permalink(123); ?>" <?php echo tsep_anchor_attributes(123); ?> class="some-class">Click here!</a>
+<a href="&lt;?php echo the_permalink(123); ?&gt;" &lt;?php echo tsep_anchor_attributes(123); ?&gt; class="some-class">Click here!</a>
 ```
 
 #### 3. Single Page Content
@@ -52,13 +53,13 @@ When set to Manual, developers must manually add anchor elements. You can either
 This option allows you to manually write an anchor element that will be added to the post's content. Use %link% for the external link, and %rel% for the target and rel attributes.
 
 ```php
-<a href="%link%" %rel%>Click here!</a>
+&gt;a href="%link%" %rel%&lt;Click here!&lt;/a&gt;
 ```
 
 This will produce the following output:
 
 ```php
-<a href="https://example.com" rel="noopener noreferrer" target="_blank">Click here!</a>
+&lt;a href="https://example.com" rel="noopener noreferrer" target="_blank"&gt;Click here!&lt;/a&gt;
 ```
 
 ## Installation
