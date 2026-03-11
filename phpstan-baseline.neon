@@ -1,0 +1,19 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Found usage of constant DOING_AJAX\. Use wp_doing_ajax\(\) instead\.$#'
+			identifier: phpstanWP.wpConstant.fetch
+			count: 1
+			path: includes/settings.php
+
+		-
+			message: '#^Parameter \#2 \$output of function get_post_types expects ''names''\|''objects'', ''OBJECT'' given\.$#'
+			identifier: argument.type
+			count: 1
+			path: includes/settings.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between ''attachment'' and WP_Post_Type will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: includes/settings.php
