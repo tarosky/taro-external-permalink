@@ -96,10 +96,11 @@ class TestTemplates extends WP_UnitTestCase {
 	 */
 	public function test_post_link_filter_returns_external_url() {
 		update_post_meta( $this->post_id, '_external_permalink', 'https://example.com' );
+		set_current_screen( 'front' );
 		$post   = get_post( $this->post_id );
 		$result = tsep_post_link_filter( 'https://original.com', $post );
-		// In test environment, is_admin() is true so the filter preserves original URL.
-		$this->assertSame( 'https://original.com', $result );
+		// On the frontend, is_admin() is false so the filter replaces with external URL.
+		$this->assertSame( 'https://example.com', $result );
 	}
 
 	/**
