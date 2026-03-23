@@ -27,6 +27,9 @@
 		<exclude name="Universal.Arrays.DisallowShortArraySyntax.Found" />
 	</rule>
 
+	<file>taro-external-permalink.php</file>
+	<file>includes</file>
+
 	<exclude-pattern>*/node_modules/*</exclude-pattern>
 	<exclude-pattern>*.js</exclude-pattern>
 	<exclude-pattern>*/vendor/*</exclude-pattern>
