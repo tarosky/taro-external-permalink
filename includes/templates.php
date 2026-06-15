@@ -84,8 +84,8 @@ function tsep_post_link_filter( $permalink, $post ) {
 	}
 	return $permalink;
 }
-add_filter( 'post_link', 'tsep_post_link_filter', 10, 2 );
-add_filter( 'post_type_link', 'tsep_post_link_filter', 10, 2 );
+add_filter( 'post_link', 'tsep_post_link_filter', 1000, 2 );
+add_filter( 'post_type_link', 'tsep_post_link_filter', 1000, 2 );
 
 /**
  * Change content of singular page.
