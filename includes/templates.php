@@ -88,6 +88,24 @@ add_filter( 'post_link', 'tsep_post_link_filter', 10, 2 );
 add_filter( 'post_type_link', 'tsep_post_link_filter', 10, 2 );
 
 /**
+ * Remove external permalink posts from taro-sitemap results.
+ *
+ * @param WP_Post[] $results Sitemap posts.
+ * @return WP_Post[]
+ */
+function tsep_filter_sitemap_results( $results ) {
+	return array_values(
+		array_filter(
+			$results,
+			function ( $post ) {
+				return ! tsep_get_url( $post );
+			}
+		)
+	);
+}
+add_filter( 'tsmap_sitemap_results', 'tsep_filter_sitemap_results' );
+
+/**
  * Change content of singular page.
  */
 add_filter( 'the_content', function ( $content ) {
