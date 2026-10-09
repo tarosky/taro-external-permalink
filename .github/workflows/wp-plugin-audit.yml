@@ -9,6 +9,6 @@ jobs:
   audit:
     uses: tarosky/workflows/.github/workflows/plugin-audit.yml@main
     with:
-      slug: external-permalink
+      slug: taro-external-permalink
       language: ja
     secrets: inherit
